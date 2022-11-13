@@ -4,6 +4,11 @@ const express = require("express"),
       cors = require("cors"),
       morgan  = require("morgan"),     
       mongoose = require("mongoose");
+// require('./app/routeHandler')(app)
+
+//routes
+
+
 
 // connecting to database 
 main().catch(err=>{
@@ -12,6 +17,7 @@ main().catch(err=>{
 async function main(){
   await mongoose.connect("mongodb://localhost:27017/cart")
 }
+
 // extras
 app.use(cors())
 app.use(bodyParser.json())
@@ -29,6 +35,18 @@ app.get("/home",  (req, res, next)=>{
   res.render("index")
 })
   
+
+
+
+
+
+const productRoutes = require("./app/Product/routes");
+const cartRoutes = require('./app/cart/routes')
+// module.exports = app => {
+    app.use("/product", productRoutes);
+    app.use("/cart", cartRoutes);
+// }
+
 
 
 // connecting to port 

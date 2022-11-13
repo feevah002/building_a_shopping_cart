@@ -4,10 +4,13 @@ exports.createProduct = async (req, res) => {
         let payload = {
             name: req.body.name,
             price: req.body.price,
+            // image: req.body.image
             image: req.file.path
         }
+        console.log(req.body.name);
         let product = await productRepository.createProduct({
-            ...payload
+            payload
+            // ...payload
         });
         res.status(200).json({
             status: true,
